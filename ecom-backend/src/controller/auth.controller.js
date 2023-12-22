@@ -1,18 +1,17 @@
 const userService = require("../services/user.service");
 const jwtProvider = require("../config/jwtProvider");
 const bcrypt = require("bcrypt");
-const cartService= require("../services/cart.service")
+const cartService = require("../services/cart.service");
 
 const register = async (req, res) => {
   try {
     const user = await userService.creatUser(req.body);
     const jwt = jwtProvider.generateToken(user._id);
 
-    await cartService.createcart(user);
+    await cartService.createCart(user);
 
     return res.status(200).send({ jwt, message: "register success" });
- 
-} catch (error) {
+  } catch (error) {
     return res.status(500).send({ error: error.message });
   }
 };
@@ -31,7 +30,7 @@ const login = async (req, res) => {
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if (isPasswordValid) {
+    if (!isPasswordValid) {
       return res.status(401).send({ message: "Invalid Password.." });
     }
 

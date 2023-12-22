@@ -25,10 +25,12 @@ const creatUser = async (userData) => {
 
 const findeUserById = async (userId) => {
   try {
-    const user = await User.findById(userId).populate("address");
+    const user = await User.findById(userId);
+    //.populate("address");
     if (!user) {
       throw new Error("No user found with id :", userId);
     }
+    //console.log("userff", user);
     return user;
   } catch (error) {
     throw new Error(error.message);
@@ -41,6 +43,7 @@ const getUserByEmail = async (email) => {
     if (!user) {
       throw new Error("No user found with email :", email);
     }
+
     return user;
   } catch (error) {
     throw new Error(error.message);
@@ -55,6 +58,7 @@ const getUserProfileByToken = async (token) => {
     if (!user) {
       throw new Error("user not found with id :", userId);
     }
+    return user;
   } catch (error) {
     throw new Error(error.message);
   }

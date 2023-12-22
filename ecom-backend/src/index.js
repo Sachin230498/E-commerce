@@ -8,9 +8,15 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  return res.status(200).send({ message: "welcome the website api - node", status: true });
+  return res
+    .status(200)
+    .send({ message: "welcome the website api - node", status: true });
 });
 
+const authRouters = require("./routes/auth.routes");
+app.use("/auth", authRouters);
 
+const userRouters = require("./routes/user.routes");
+app.use("/api/users", userRouters);
 
 module.exports = app;
