@@ -70,4 +70,4 @@ async function addCartItem(userId, req) {
   }
 }
 
-module.exports = { createCart };
+module.exports = { createCart, findUsercart, addCartItem };
